@@ -21,5 +21,8 @@ namespace P_000703.Entidades
         public int periodo_cobertura { get; set; }
         public decimal precio { get; set; }
         public System.Guid pol_tipo_riesgo { get; set; }
+        public string cubrimiento { get; set; }
+        public string tipo_riesgo { get; set; }
+        public decimal cobertura_maxima { get; set; }
     }
 }

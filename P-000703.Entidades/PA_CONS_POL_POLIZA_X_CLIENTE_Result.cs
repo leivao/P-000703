@@ -17,5 +17,9 @@ namespace P_000703.Entidades
         public System.Guid crm_cliente { get; set; }
         public System.Guid registrado_por { get; set; }
         public System.DateTime fecha_registro { get; set; }
+        public string nombre { get; set; }
+        public string nombre_completo { get; set; }
+        public string tipo_riesgo { get; set; }
+        public string tipo_cubrimiento { get; set; }
     }
 }

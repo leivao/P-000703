@@ -99,12 +99,19 @@
           <Property Type="Int32" Name="periodo_cobertura" Nullable="false" />
           <Property Type="Decimal" Name="precio" Nullable="false" Precision="18" Scale="5" />
           <Property Type="Guid" Name="pol_tipo_riesgo" Nullable="false" />
+          <Property Type="String" Name="cubrimiento" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="tipo_riesgo" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="cobertura_maxima" Nullable="false" Precision="5" Scale="2" />
         </ComplexType>
         <ComplexType Name="PA_CONS_POL_POLIZA_X_CLIENTE_Result">
           <Property Type="Guid" Name="pol_poliza" Nullable="false" />
           <Property Type="Guid" Name="crm_cliente" Nullable="false" />
           <Property Type="Guid" Name="registrado_por" Nullable="false" />
           <Property Type="DateTime" Name="fecha_registro" Nullable="false" Precision="23" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombre_completo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="tipo_riesgo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="tipo_cubrimiento" Nullable="false" MaxLength="250" />
         </ComplexType>
         <ComplexType Name="PA_CONS_POL_TIPO_CUBRIMIENTO_Result">
           <Property Type="Guid" Name="pol_tipo_cubrimiento" Nullable="false" />
@@ -134,6 +141,9 @@
                 <ScalarProperty Name="periodo_cobertura" ColumnName="periodo_cobertura" />
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="pol_tipo_riesgo" ColumnName="pol_tipo_riesgo" />
+                <ScalarProperty Name="cubrimiento" ColumnName="cubrimiento" />
+                <ScalarProperty Name="tipo_riesgo" ColumnName="tipo_riesgo" />
+                <ScalarProperty Name="cobertura_maxima" ColumnName="cobertura_maxima" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -144,6 +154,10 @@
                 <ScalarProperty Name="crm_cliente" ColumnName="crm_cliente" />
                 <ScalarProperty Name="registrado_por" ColumnName="registrado_por" />
                 <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="tipo_riesgo" ColumnName="tipo_riesgo" />
+                <ScalarProperty Name="tipo_cubrimiento" ColumnName="tipo_cubrimiento" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

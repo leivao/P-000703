@@ -86,7 +86,6 @@
   <ItemGroup>
     <Content Include="P-000703.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>P-000703.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
