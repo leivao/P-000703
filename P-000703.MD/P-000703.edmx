@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SEGUROSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="PA_CONS_POL_POLIZA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ESTADO" Type="varchar" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="PA_CONS_POL_POLIZA_X_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_crm_cliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ESTADO" Type="varchar" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="PA_CONS_POL_TIPO_CUBRIMIENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ESTADO" Type="varchar" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="PA_CONS_POL_TIPO_RIESGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ESTADO" Type="varchar" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="PA_MANT_POL_POLIZA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_tipo_operacion" Type="int" Mode="In" />
+          <Parameter Name="p_pol_poliza" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="p_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="p_pol_tipo_cubrimiento" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="p_descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="p_inicio_vigencia" Type="datetime" Mode="In" />
+          <Parameter Name="p_periodo_cobertura" Type="int" Mode="In" />
+          <Parameter Name="p_precio" Type="decimal" Mode="In" />
+          <Parameter Name="p_pol_tipo_riesgo" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ESTADO" Type="varchar" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="PA_MANT_POL_POLIZA_X_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_tipo_operacion" Type="int" Mode="In" />
+          <Parameter Name="p_pol_poliza" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="p_crm_cliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="p_registrado_por" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="p_fecha_registro" Type="datetime" Mode="In" />
+          <Parameter Name="ESTADO" Type="varchar" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="SEGUROSModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SEGUROSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SEGUROSEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="PA_CONS_POL_POLIZA" ReturnType="Collection(SEGUROSModel.PA_CONS_POL_POLIZA_Result)">
+            <Parameter Name="ESTADO" Mode="InOut" Type="String" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_CONS_POL_POLIZA_X_CLIENTE" ReturnType="Collection(SEGUROSModel.PA_CONS_POL_POLIZA_X_CLIENTE_Result)">
+            <Parameter Name="p_crm_cliente" Mode="In" Type="Guid" />
+            <Parameter Name="ESTADO" Mode="InOut" Type="String" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_CONS_POL_TIPO_CUBRIMIENTO" ReturnType="Collection(SEGUROSModel.PA_CONS_POL_TIPO_CUBRIMIENTO_Result)">
+            <Parameter Name="ESTADO" Mode="InOut" Type="String" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_CONS_POL_TIPO_RIESGO" ReturnType="Collection(SEGUROSModel.PA_CONS_POL_TIPO_RIESGO_Result)">
+            <Parameter Name="ESTADO" Mode="InOut" Type="String" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_MANT_POL_POLIZA">
+            <Parameter Name="p_tipo_operacion" Mode="In" Type="Int32" />
+            <Parameter Name="p_pol_poliza" Mode="In" Type="Guid" />
+            <Parameter Name="p_nombre" Mode="In" Type="String" />
+            <Parameter Name="p_pol_tipo_cubrimiento" Mode="In" Type="Guid" />
+            <Parameter Name="p_descripcion" Mode="In" Type="String" />
+            <Parameter Name="p_inicio_vigencia" Mode="In" Type="DateTime" />
+            <Parameter Name="p_periodo_cobertura" Mode="In" Type="Int32" />
+            <Parameter Name="p_precio" Mode="In" Type="Decimal" />
+            <Parameter Name="p_pol_tipo_riesgo" Mode="In" Type="Guid" />
+            <Parameter Name="ESTADO" Mode="InOut" Type="String" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_MANT_POL_POLIZA_X_CLIENTE">
+            <Parameter Name="p_tipo_operacion" Mode="In" Type="Int32" />
+            <Parameter Name="p_pol_poliza" Mode="In" Type="Guid" />
+            <Parameter Name="p_crm_cliente" Mode="In" Type="Guid" />
+            <Parameter Name="p_registrado_por" Mode="In" Type="Guid" />
+            <Parameter Name="p_fecha_registro" Mode="In" Type="DateTime" />
+            <Parameter Name="ESTADO" Mode="InOut" Type="String" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="PA_CONS_POL_POLIZA_Result">
+          <Property Type="Guid" Name="pol_poliza" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Guid" Name="pol_tipo_cubrimiento" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="250" />
+          <Property Type="DateTime" Name="inicio_vigencia" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="periodo_cobertura" Nullable="false" />
+          <Property Type="Decimal" Name="precio" Nullable="false" Precision="18" Scale="5" />
+          <Property Type="Guid" Name="pol_tipo_riesgo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="PA_CONS_POL_POLIZA_X_CLIENTE_Result">
+          <Property Type="Guid" Name="pol_poliza" Nullable="false" />
+          <Property Type="Guid" Name="crm_cliente" Nullable="false" />
+          <Property Type="Guid" Name="registrado_por" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_registro" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="PA_CONS_POL_TIPO_CUBRIMIENTO_Result">
+          <Property Type="Guid" Name="pol_tipo_cubrimiento" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="250" />
+          <Property Type="Decimal" Name="cobertura" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="Boolean" Name="activo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="PA_CONS_POL_TIPO_RIESGO_Result">
+          <Property Type="Guid" Name="pol_tipo_riesgo" Nullable="false" />
+          <Property Type="String" Name="tipo_riesgo" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="activo" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SEGUROSModelStoreContainer" CdmEntityContainer="SEGUROSEntities" >
+          <FunctionImportMapping FunctionImportName="PA_CONS_POL_POLIZA" FunctionName="SEGUROSModel.Store.PA_CONS_POL_POLIZA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SEGUROSModel.PA_CONS_POL_POLIZA_Result">
+                <ScalarProperty Name="pol_poliza" ColumnName="pol_poliza" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="pol_tipo_cubrimiento" ColumnName="pol_tipo_cubrimiento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="inicio_vigencia" ColumnName="inicio_vigencia" />
+                <ScalarProperty Name="periodo_cobertura" ColumnName="periodo_cobertura" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="pol_tipo_riesgo" ColumnName="pol_tipo_riesgo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PA_CONS_POL_POLIZA_X_CLIENTE" FunctionName="SEGUROSModel.Store.PA_CONS_POL_POLIZA_X_CLIENTE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SEGUROSModel.PA_CONS_POL_POLIZA_X_CLIENTE_Result">
+                <ScalarProperty Name="pol_poliza" ColumnName="pol_poliza" />
+                <ScalarProperty Name="crm_cliente" ColumnName="crm_cliente" />
+                <ScalarProperty Name="registrado_por" ColumnName="registrado_por" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PA_CONS_POL_TIPO_CUBRIMIENTO" FunctionName="SEGUROSModel.Store.PA_CONS_POL_TIPO_CUBRIMIENTO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SEGUROSModel.PA_CONS_POL_TIPO_CUBRIMIENTO_Result">
+                <ScalarProperty Name="pol_tipo_cubrimiento" ColumnName="pol_tipo_cubrimiento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cobertura" ColumnName="cobertura" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PA_CONS_POL_TIPO_RIESGO" FunctionName="SEGUROSModel.Store.PA_CONS_POL_TIPO_RIESGO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SEGUROSModel.PA_CONS_POL_TIPO_RIESGO_Result">
+                <ScalarProperty Name="pol_tipo_riesgo" ColumnName="pol_tipo_riesgo" />
+                <ScalarProperty Name="tipo_riesgo" ColumnName="tipo_riesgo" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PA_MANT_POL_POLIZA" FunctionName="SEGUROSModel.Store.PA_MANT_POL_POLIZA" />
+          <FunctionImportMapping FunctionImportName="PA_MANT_POL_POLIZA_X_CLIENTE" FunctionName="SEGUROSModel.Store.PA_MANT_POL_POLIZA_X_CLIENTE" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

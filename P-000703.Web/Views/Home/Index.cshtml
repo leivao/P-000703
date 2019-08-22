@@ -1,0 +1,300 @@
+﻿@{
+    ViewBag.Title = "Seguros";
+}
+<br />
+<div ng-app="myApp" ng-controller="PolizaCtrl">
+    <input type="hidden" ng-model="IdPoliza" ng-init="IdPoliza='0'" />
+
+    <div class="container">
+        <p>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#poliza">Administrar poliza</button>
+        </p>
+        <div id="poliza" class="collapse">
+            <div class="row">
+                <div class="col-md-12 mt-5">
+
+                    <h1>Poliza</h1>
+
+                    <form [formGroup]="contacto" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" ng-model="Nombre" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label>Descripcion</label>
+                                    <input type="text" class="form-control" ng-model="Descripcion" placeholder="Descripcion">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label> Tipo cubrimiento</label>
+                                    <select class="form-control"  ng-model="cubrimiento">
+                                        <option ng-repeat="x in Listcubrimiento.data" value="{{x.pol_tipo_cubrimiento}}">{{x.nombre}}</option>
+                                    </select>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label for="mensaje">Inicio vigencia</label>
+                                    <input type="text" class="form-control" ng-model="Vigencia" placeholder="Inicio Vigencia">
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label>Periodo cobertura</label>
+                                    <input type="number" class="form-control" ng-model="Periodo" placeholder="Periodo">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label>Precio </label>
+                                    <input type="number" class="form-control" ng-model="Precio" placeholder="Precio">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+
+                                <div class="form-group">
+                                    <label> Tipo riesgo</label>
+                                    <select class="form-control"  ng-model="riesgo">
+                                        <option ng-repeat="x in Listriesgo.data" value="{{x.pol_tipo_riesgo}}">{{x.tipo_riesgo}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <button [disabled]="loading" class="btn btn-primary" ng-click="Save()">Guardar</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <br />
+        <p>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#PolizaCliente">Polizas cliente</button>
+        </p>
+        <div id="PolizaCliente" class="collapse">
+            <div class="row">
+                <div class="col-md-12 mt-5">
+
+                    <h1>Administrar polizas cliente</h1>
+
+                    <form [formGroup]="contacto" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" ng-model="Nombre" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label>Correo</label>
+                                    <input type="text" class="form-control" ng-model="Correo" placeholder="Correo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label> Polizas</label>
+                                    <select class="form-control" formControlName="Polizas">
+                                        <option value="">Seleccionar</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <button [disabled]="loading" class="btn btn-primary">Guardar</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <h3>Polizas</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Tipo Cubrimiento</th>
+                        <th>Inicio vigencia</th>
+                        <th>Periodo cobertura</th>
+                        <th>Precio</th>
+                        <th>Tipo riesgo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="c in PolizasData.data">
+                        <td>{{c.pol_poliza}}</td>
+                        <td>{{c.nombre}}</td>
+                        <td>{{c.descripcion}}</td>
+                        <td>{{c.pol_tipo_cubrimiento}}</td>
+                        <td>{{c.inicio_vigencia}}</td>
+                        <td>{{c.periodo_cobertura}}</td>
+                        <td>{{c.precio}}</td>
+                        <td>{{c.pol_tipo_riesgo}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" id="{{c.pol_poliza}}" ng-click="Get(c.pol_poliza)">Editar</button>
+                            <button type="button" class="btn btn-danger" id="{{c.pol_poliza}}" ng-click="Delete(c.pol_poliza)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        myApp.controller("PolizaCtrl", function ($scope, $http) {
+            
+            var cubrimientos = {
+                method: "Post",
+                url: '../api/PolizaConsultas/ConsultarTipoCubrimiento',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+            }
+
+            $http(cubrimientos).then(function (mRes) {
+                $scope.Listcubrimiento= mRes.data
+                
+            });
+            var riesgos = {
+                method: "Post",
+                url: '../api/PolizaConsultas/ConsultarTipoRiesgo',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+            }
+
+            $http(riesgos).then(function (mRes) {
+                $scope.Listriesgo = mRes.data
+                $scope.GetPolizas();
+            });
+           // $scope.GetPolizas();
+            /* Save and Update Employee */
+            $scope.Save = function () {
+
+                var id = $scope.IdPoliza;
+                var objReq = {
+                    Nombre: $scope.Nombre,
+                    TipoCubrimiento: $scope.cubrimiento,
+                    Descripcion: $scope.Descripcion,
+                    //InicioVigencia: $scope.Vigencia,
+                    PeriodoCobertura: $scope.Periodo,
+                    Precio: $scope.Precio,
+                    Pol_Tipo_Riesgo: $scope.riesgo,
+                    TipoOperacion:1
+                }
+                if (id == 0) {
+                    var saveReq = {
+                        method: "POST",
+                        url: "../api/PolizaMantenimiento/MantenimientoPoliza",
+
+                        data: JSON.stringify(objReq),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                    }
+
+                    $http(saveReq).then(function (mRes) {
+                        var o = angular.fromJson(mRes.data)
+                        $scope.GetPolizas();
+                       
+                    });
+                }
+                else {
+                    var updateReq = {
+                        method: "POST",
+                        url: "../api/Polizas/ActualizarPoliza",
+                        data: objReq
+                    }
+
+                    $http(updateReq).then(function (mRes) {
+                        $scope.GetPolizas();
+                        var o = angular.fromJson(mRes.data)
+                        alert(o.Outmsg);
+                    });
+                }
+                $scope.ClearControls();
+            };
+        
+            $scope.GetPolizas = function () {
+                var getallReq = {
+                    method: "POST",
+                    url: "../api/PolizaConsultas/ConsultarPoliza",
+                    data: {}
+                }
+
+                $http(getallReq).then(function (mRes) {
+                    $scope.PolizasData = angular.fromJson(mRes.data);
+                });
+            }
+            $scope.ClearControls = function () {
+                $scope.Nombre = '',
+                    $scope.cubrimiento = '',
+                    $scope.Descripcion = '',
+                    $scope.Vigencia = '',
+                    $scope.Periodo = '',
+                    $scope.Precio = '',
+                    $scope.riesgo = '',
+                    $scope.IdPoliza = 0;
+
+            };
+            $scope.Delete = function (id) {
+                var objReq = {
+                    Pol_Poliza: id,
+                  
+                    TipoOperacion: 3
+                }
+                var deleteReq = {
+                    method: "POST",
+                    url: "../api/PolizaMantenimiento/MantenimientoPoliza",
+
+                    data: JSON.stringify(objReq),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                }
+
+                $http(deleteReq).then(function (mRes) {
+                    var o = angular.fromJson(mRes.data)
+                    alert(o.Outmsg);
+                    $scope.GetPolizas();
+                });
+            };
+        });
+    </script>
+
+}
