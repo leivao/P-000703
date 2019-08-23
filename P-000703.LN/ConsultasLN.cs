@@ -11,6 +11,28 @@ namespace P_000703.LN
 {
     public class ConsultasLN : IConsultasLN
     {
+        public ConsultarClientesRes ConsultarClientes(ConsultarClientesReq objReq)
+        {
+            ConsultasAD consultasAD = new ConsultasAD();
+            ConsultarClientesRes objResultado = new ConsultarClientesRes();
+
+            try
+            {
+                objResultado = consultasAD.ConsultarClientes(objReq);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Estado = Entidades.Constantes.COD_ERROR;
+                objResultado.Mensaje = ((ex.InnerException != null) ? Environment.NewLine + ex.InnerException.Message : string.Empty);
+                throw;
+            }
+            finally
+            {
+                consultasAD = null;
+            }
+            return objResultado;
+        }
         public ConsultarPolizaRes ConsultarPoliza(ConsultarPolizaReq objReq)
         {
             ConsultasAD consultasAD = new ConsultasAD();
@@ -34,6 +56,29 @@ namespace P_000703.LN
             return objResultado;
         }
 
+        public ConsultarPolizaxIDRes ConsultarPolizaxID(ConsultarPolizaxIDReq objReq)
+        {
+            ConsultasAD consultasAD = new ConsultasAD();
+            ConsultarPolizaxIDRes objResultado = new ConsultarPolizaxIDRes();
+
+            try
+            {
+                objResultado = consultasAD.ConsultarPolizaxID(objReq);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Estado = Entidades.Constantes.COD_ERROR;
+                objResultado.Mensaje = ((ex.InnerException != null) ? Environment.NewLine + ex.InnerException.Message : string.Empty);
+                throw;
+            }
+            finally
+            {
+                consultasAD = null;
+            }
+            return objResultado;
+        }
+
         public ConsultarPolizaClienteRes ConsultarPolizaCliente(ConsultarPolizaClienteReq objReq)
         {
             ConsultasAD consultasAD = new ConsultasAD();
@@ -42,6 +87,32 @@ namespace P_000703.LN
             try
             {
                 objResultado = consultasAD.ConsultarPolizaCliente(objReq);
+
+            }
+            catch (Exception ex)
+            {
+                objResultado.Estado = Entidades.Constantes.COD_ERROR;
+                objResultado.Mensaje = ((ex.InnerException != null) ? Environment.NewLine + ex.InnerException.Message : string.Empty);
+                throw;
+            }
+            finally
+            {
+
+                consultasAD = null;
+            }
+
+
+            return objResultado;
+        }
+
+        public ConsultarPolizaClientexIDRes ConsultarPolizaClientexID(ConsultarPolizaClientexIDReq objReq)
+        {
+            ConsultasAD consultasAD = new ConsultasAD();
+            ConsultarPolizaClientexIDRes objResultado = new ConsultarPolizaClientexIDRes();
+
+            try
+            {
+                objResultado = consultasAD.ConsultarPolizaClientexID(objReq);
 
             }
             catch (Exception ex)

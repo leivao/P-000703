@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.Core.Objects;
+using System.Globalization;
 
 namespace P_000703.AD
 {
@@ -27,11 +28,12 @@ namespace P_000703.AD
                         , objReq.Nombre
                         , objReq?.TipoCubrimiento == null ? Guid.NewGuid() : new Guid(objReq.TipoCubrimiento)
                         , objReq.Descripcion
-                        , objReq?.InicioVigencia == null || objReq?.InicioVigencia == DateTime.MinValue? DateTime.Now: objReq.InicioVigencia
+                        , DateTime.ParseExact((objReq?.InicioVigencia ?? DateTime.Now.ToString("dd/MM/yyyy")), "dd/MM/yyyy", CultureInfo.InvariantCulture)
                         , objReq.PeriodoCobertura
                         , objReq.Precio
                         , objReq?.Pol_Tipo_Riesgo == null ? Guid.NewGuid() : new Guid(objReq.Pol_Tipo_Riesgo), objEstado, objMensaje);
-
+                    objResultado.Estado = objEstado.Value.ToString();
+                    objResultado.Mensaje = objMensaje.Value.ToString();
                     if (objEstado.Value.ToString().Equals(Entidades.Constantes.COD_ERROR))
                     {
                         objResultado.Estado = Entidades.Constantes.COD_ERROR;
@@ -43,7 +45,7 @@ namespace P_000703.AD
             {
                 objResultado.Estado = Entidades.Constantes.COD_ERROR;
                 objResultado.Mensaje = ((ex.InnerException != null) ? Environment.NewLine + ex.InnerException.Message : string.Empty);
-                throw;
+                
             }
             finally
             {
@@ -65,9 +67,11 @@ namespace P_000703.AD
                 using (P_000703.MD.SEGUROSEntities objModelo = new P_000703.MD.SEGUROSEntities())
                 {
                     objModelo.PA_MANT_POL_POLIZA_X_CLIENTE(objReq.TipoOperacion
-                        , objReq.Pol_Poliza
-                        , objReq.Crm_Cliente
-                        , objReq.RegistradoPor
+                        , new Guid(objReq.Pol_Poliza ?? Guid.Empty.ToString())
+                        , new Guid(objReq.Crm_Cliente ?? Guid.Empty.ToString())
+                        , objReq.Nombre_Cliente ?? String.Empty
+                        , objReq.Correo_Cliente ?? String.Empty
+                        , new Guid(objReq?.RegistradoPor ?? Guid.Empty.ToString())
                         , DateTime.Now, objEstado, objMensaje);
 
                     if (objEstado.Value.ToString().Equals(Entidades.Constantes.COD_ERROR))

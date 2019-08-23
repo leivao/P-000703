@@ -94,7 +94,7 @@ namespace P_000703.MD
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MANT_POL_POLIZA", p_tipo_operacionParameter, p_pol_polizaParameter, p_nombreParameter, p_pol_tipo_cubrimientoParameter, p_descripcionParameter, p_inicio_vigenciaParameter, p_periodo_coberturaParameter, p_precioParameter, p_pol_tipo_riesgoParameter, eSTADO, mENSAJE);
         }
     
-        public virtual int PA_MANT_POL_POLIZA_X_CLIENTE(Nullable<int> p_tipo_operacion, Nullable<System.Guid> p_pol_poliza, Nullable<System.Guid> p_crm_cliente, Nullable<System.Guid> p_registrado_por, Nullable<System.DateTime> p_fecha_registro, ObjectParameter eSTADO, ObjectParameter mENSAJE)
+        public virtual int PA_MANT_POL_POLIZA_X_CLIENTE(Nullable<int> p_tipo_operacion, Nullable<System.Guid> p_pol_poliza, Nullable<System.Guid> p_crm_cliente, string p_nombre_cliente, string p_correo_cliente, Nullable<System.Guid> p_registrado_por, Nullable<System.DateTime> p_fecha_registro, ObjectParameter eSTADO, ObjectParameter mENSAJE)
         {
             var p_tipo_operacionParameter = p_tipo_operacion.HasValue ?
                 new ObjectParameter("p_tipo_operacion", p_tipo_operacion) :
@@ -108,6 +108,14 @@ namespace P_000703.MD
                 new ObjectParameter("p_crm_cliente", p_crm_cliente) :
                 new ObjectParameter("p_crm_cliente", typeof(System.Guid));
     
+            var p_nombre_clienteParameter = p_nombre_cliente != null ?
+                new ObjectParameter("p_nombre_cliente", p_nombre_cliente) :
+                new ObjectParameter("p_nombre_cliente", typeof(string));
+    
+            var p_correo_clienteParameter = p_correo_cliente != null ?
+                new ObjectParameter("p_correo_cliente", p_correo_cliente) :
+                new ObjectParameter("p_correo_cliente", typeof(string));
+    
             var p_registrado_porParameter = p_registrado_por.HasValue ?
                 new ObjectParameter("p_registrado_por", p_registrado_por) :
                 new ObjectParameter("p_registrado_por", typeof(System.Guid));
@@ -116,7 +124,34 @@ namespace P_000703.MD
                 new ObjectParameter("p_fecha_registro", p_fecha_registro) :
                 new ObjectParameter("p_fecha_registro", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MANT_POL_POLIZA_X_CLIENTE", p_tipo_operacionParameter, p_pol_polizaParameter, p_crm_clienteParameter, p_registrado_porParameter, p_fecha_registroParameter, eSTADO, mENSAJE);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MANT_POL_POLIZA_X_CLIENTE", p_tipo_operacionParameter, p_pol_polizaParameter, p_crm_clienteParameter, p_nombre_clienteParameter, p_correo_clienteParameter, p_registrado_porParameter, p_fecha_registroParameter, eSTADO, mENSAJE);
+        }
+    
+        public virtual ObjectResult<PA_CONS_POL_POLIZA_X_ID_Result> PA_CONS_POL_POLIZA_X_ID(Nullable<System.Guid> pol_poliza, ObjectParameter eSTADO, ObjectParameter mENSAJE)
+        {
+            var pol_polizaParameter = pol_poliza.HasValue ?
+                new ObjectParameter("pol_poliza", pol_poliza) :
+                new ObjectParameter("pol_poliza", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PA_CONS_POL_POLIZA_X_ID_Result>("PA_CONS_POL_POLIZA_X_ID", pol_polizaParameter, eSTADO, mENSAJE);
+        }
+    
+        public virtual ObjectResult<PA_CONS_CRM_CLIENTE_Result> PA_CONS_CRM_CLIENTE(ObjectParameter eSTADO, ObjectParameter mENSAJE)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PA_CONS_CRM_CLIENTE_Result>("PA_CONS_CRM_CLIENTE", eSTADO, mENSAJE);
+        }
+    
+        public virtual ObjectResult<PA_CONS_POL_POLIZA_X_CLIENTE_X_ID_Result> PA_CONS_POL_POLIZA_X_CLIENTE_X_ID(Nullable<System.Guid> p_crm_cliente, Nullable<System.Guid> p_pol_poliza, ObjectParameter eSTADO, ObjectParameter mENSAJE)
+        {
+            var p_crm_clienteParameter = p_crm_cliente.HasValue ?
+                new ObjectParameter("p_crm_cliente", p_crm_cliente) :
+                new ObjectParameter("p_crm_cliente", typeof(System.Guid));
+    
+            var p_pol_polizaParameter = p_pol_poliza.HasValue ?
+                new ObjectParameter("p_pol_poliza", p_pol_poliza) :
+                new ObjectParameter("p_pol_poliza", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PA_CONS_POL_POLIZA_X_CLIENTE_X_ID_Result>("PA_CONS_POL_POLIZA_X_CLIENTE_X_ID", p_crm_clienteParameter, p_pol_polizaParameter, eSTADO, mENSAJE);
         }
     }
 }

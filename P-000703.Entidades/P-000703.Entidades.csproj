@@ -49,7 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constantes.cs" />
+    <Compile Include="Entrada\ConsultarPolizaClientexIDReq.cs" />
     <Compile Include="Entrada\ConsultarPolizaClienteReq.cs" />
+    <Compile Include="Entrada\ConsultarClientesReq.cs" />
+    <Compile Include="Entrada\ConsultarPolizaxIDReq.cs" />
     <Compile Include="Entrada\ConsultarPolizaReq.cs" />
     <Compile Include="Entrada\ConsultarTipoCubrimientoReq.cs" />
     <Compile Include="Entrada\ConsultarTipoRiesgoReq.cs" />
@@ -61,10 +64,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>P-000703.tt</DependentUpon>
     </Compile>
+    <Compile Include="P-0007031.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>P-000703.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PA_CONS_CRM_CLIENTE_Result.cs">
+      <DependentUpon>P-000703.tt</DependentUpon>
+    </Compile>
     <Compile Include="PA_CONS_POL_POLIZA_Result.cs">
       <DependentUpon>P-000703.tt</DependentUpon>
     </Compile>
     <Compile Include="PA_CONS_POL_POLIZA_X_CLIENTE_Result.cs">
+      <DependentUpon>P-000703.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PA_CONS_POL_POLIZA_X_CLIENTE_X_ID_Result.cs">
+      <DependentUpon>P-000703.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PA_CONS_POL_POLIZA_X_ID_Result.cs">
       <DependentUpon>P-000703.tt</DependentUpon>
     </Compile>
     <Compile Include="PA_CONS_POL_TIPO_CUBRIMIENTO_Result.cs">
@@ -75,7 +92,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Salida\BaseRes.cs" />
+    <Compile Include="Salida\ConsultarClientesRes.cs" />
+    <Compile Include="Salida\ConsultarPolizaClientexIDRes.cs" />
     <Compile Include="Salida\ConsultarPolizaClienteRes.cs" />
+    <Compile Include="Salida\ConsultarPolizaxIDRes.cs" />
     <Compile Include="Salida\PolizaRes.cs" />
     <Compile Include="Salida\ConsultarPolizaRes.cs" />
     <Compile Include="Salida\ConsultarTipoCubrimientoRes.cs" />
@@ -86,6 +106,7 @@
   <ItemGroup>
     <Content Include="P-000703.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>P-0007031.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

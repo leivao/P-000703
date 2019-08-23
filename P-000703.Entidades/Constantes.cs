@@ -11,5 +11,11 @@ namespace P_000703.Entidades
         public const String COD_CORRECTO = "00";
         public const String COD_ADVERTENCIA = "98";
         public const String COD_ERROR = "99";
+        public enum TIPO_OPERACION
+        {
+            INSERTAR = 1,
+            MODIFICAR,
+            ELIMINAR
+        };
     }
 }

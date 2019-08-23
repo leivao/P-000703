@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "Seguros";
+}
+<br />
+<div ng-app="myApp" ng-controller="PolizaClienteCtrl">
+    <input type="hidden" ng-model="IdPoliza" ng-init="IdPoliza='0'" />
+
+    <div class="container">
+      
+        <br />
+        <p>
+            <button id="btnPoliza" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#PolizaCliente">Polizas cliente</button>
+        </p>
+        <div id="PolizaCliente" class="collapse">
+            <div class="row">
+                <div class="col-md-12 mt-5">
+
+                    <h1>Administrar polizas cliente</h1>
+
+                    <form [formGroup]="contacto" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label> Clientes</label>
+                                    <select class="form-control" ng-model="cmbCliente">
+                                        <option ng-repeat="x in ListClientes.data" value="{{x.crm_cliente}}">{{x.nombre_completo}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <div class="form-group">
+                                    <label> Polizas</label>
+                                    <select class="form-control" ng-model="cmbpoliza">
+                                        <option ng-repeat="x in ListPolizas.data" value="{{x.pol_poliza}}">{{x.nombre}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <button [disabled]="loading" class="btn btn-primary" ng-click="Save()">Guardar</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <h3>Polizas</h3>
+            <div class="row">
+                <div class="col-md-6 mt-5">
+                    <div class="form-group">
+                        <label> Clientes</label>
+                        <select class="form-control" ng-model="cmbClienteFiltro">
+                            <option ng-repeat="x in ListClientes.data" value="{{x.crm_cliente}}">{{x.nombre_completo}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="loading" class="btn btn-primary" ng-click="GetPolizasCliente()">Filtrar</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+           
+                            <th>Tipo Cubrimiento</th>
+                           
+                            <th>Tipo riesgo</th>
+                             <th>Cliente</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="c in PolizasData.data">
+                            <td>{{c.pol_poliza}}</td>
+                            <td>{{c.nombre}}</td>
+                            <td>{{c.tipo_cubrimiento}}</td>
+                            <td>{{c.tipo_riesgo}}</td>
+                            <td>{{c.crm_cliente}}</td>
+                            <td>
+                              <button type="button" class="btn btn-danger" id="{{c.crm_cliente}}" ng-click="Delete(c.crm_cliente,c.pol_poliza)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <script>
+        var myApp = angular.module("myApp", []);
+
+        myApp.controller("PolizaClienteCtrl", function ($scope, $http) {
+
+            var polizas = {
+                method: "Post",
+                url: '../api/PolizaConsultas/ConsultarPoliza',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+            }
+
+            $http(polizas).then(function (mRes) {
+                $scope.ListPolizas = mRes.data
+
+            });
+            var clientes = {
+                method: "Post",
+                url: '../api/PolizaConsultas/ConsultarClientes',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+            }
+
+            $http(clientes).then(function (mRes) {
+                $scope.ListClientes = mRes.data
+
+            });
+
+
+            $scope.Save = function () {
+
+                var id = $scope.IdPoliza;
+                var objReq = {
+                    Crm_Cliente: $scope.cmbCliente,
+                    Pol_Poliza: $scope.cmbpoliza,
+                   
+                    
+                    TipoOperacion: 1
+                }
+                if (id == 0) {
+                    var saveReq = {
+                        method: "POST",
+                        url: "../api/PolizaMantenimiento/MantenimientoPolizaCliente",
+
+                        data: JSON.stringify(objReq),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                    }
+
+                    $http(saveReq).then(function (mRes) {
+                        var o = angular.fromJson(mRes.data)
+                        $scope.GetPolizasCliente();
+
+                    });
+                }
+                else {
+                    var objReq = {
+                        Crm_Cliente: $scope.cmbCliente,
+                        Pol_Poliza: $scope.cmbpoliza,
+
+
+                        TipoOperacion: 2
+                    }
+                    var updateReq = {
+                        method: "POST",
+                        url: "../api/Polizas/MantenimientoPolizaCliente",
+                        data: objReq
+                    }
+
+                    $http(updateReq).then(function (mRes) {
+                        $scope.GetPolizasCliente();
+                        var o = angular.fromJson(mRes.data)
+                        alert(o.data);
+                    });
+                }
+                $scope.ClearControls();
+            };
+
+            $scope.GetPolizasCliente = function () {
+                var objReq = {
+                    Crm_Cliente: $scope.cmbClienteFiltro
+            
+                }
+                var getallReq = {
+                    method: "POST",
+                    url: "../api/PolizaConsultas/ConsultarPolizaCliente",
+                    data: JSON.stringify(objReq),
+                }
+
+                $http(getallReq).then(function (mRes) {
+                    $scope.PolizasData = angular.fromJson(mRes.data);
+                });
+            }
+            $scope.ClearControls = function () {
+                $scope.Nombre = '',
+                    $scope.Correo = '',
+                    $scope.cmbpoliza = ''
+                $("#btnPoliza").click();
+
+            };
+            $scope.Delete = function (id,poliza) {
+                var objReq = {
+                    Crm_Cliente: id,
+                    Pol_Poliza:poliza,
+                    TipoOperacion: 3
+                }
+                var deleteReq = {
+                    method: "POST",
+                    url: "../api/PolizaMantenimiento/MantenimientoPolizaCliente",
+
+                    data: JSON.stringify(objReq),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                }
+
+                $http(deleteReq).then(function (mRes) {
+                    var o = angular.fromJson(mRes.data)
+                   
+                    $scope.GetPolizasCliente();
+                });
+            };
+        });
+    </script>
+
+}

@@ -56,7 +56,7 @@ namespace P_000703.LN
             {
                 objResultado.Estado = Entidades.Constantes.COD_ERROR;
                 objResultado.Mensaje = ((ex.InnerException != null) ? Environment.NewLine + ex.InnerException.Message : string.Empty);
-                throw;
+                
             }
             finally
             {

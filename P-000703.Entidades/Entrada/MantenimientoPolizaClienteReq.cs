@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace P_000703.Entidades.Entrada
 {
-    [Serializable]
+    
     public class MantenimientoPolizaClienteReq
     {
         public int TipoOperacion { get; set; }
-        public Guid Pol_Poliza { get; set; }
-        public Guid Crm_Cliente { get; set; }
-        public Guid RegistradoPor { get; set; }
+        public String Pol_Poliza { get; set; }
+        public String Crm_Cliente { get; set; }
+        public String Nombre_Cliente { get; set; }
+        public String Correo_Cliente { get; set; }
+        public String RegistradoPor { get; set; }
         //public DateTime FechaRegistro { get; set; }
     }
 }

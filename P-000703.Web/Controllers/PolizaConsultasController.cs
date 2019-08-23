@@ -48,6 +48,16 @@ namespace P_000703.Web.Controllers
         }
 
         [HttpPost]
+        public IHttpActionResult ConsultarClientes()
+        {
+            ConsultarClientesReq oReq = new ConsultarClientesReq();
+            ConsultarClientesRes oRes = new ConsultarClientesRes();
+
+            oRes = _consultasLN.ConsultarClientes(oReq);
+            return Json(new { data = oRes.ListadoClientes });
+        }
+
+        [HttpPost]
         public IHttpActionResult ConsultarPoliza()
         {
             ConsultarPolizaReq oReq = new ConsultarPolizaReq();
@@ -56,14 +66,34 @@ namespace P_000703.Web.Controllers
             oRes = _consultasLN.ConsultarPoliza(oReq);
             return Json(new { data = oRes.ListadoPolizas });
         }
+
         [HttpPost]
-        public ConsultarPolizaClienteRes ConsultarPolizaCliente()
+        public IHttpActionResult ConsultarPolizaId(ConsultarPolizaxIDReq objReq)  
         {
-            ConsultarPolizaClienteReq oReq = new ConsultarPolizaClienteReq();
+           
+            ConsultarPolizaxIDRes oRes = new ConsultarPolizaxIDRes();          
+            oRes = _consultasLN.ConsultarPolizaxID(objReq);
+            return Json(new { data = oRes.ListadoPolizas });
+        }
+
+        [HttpPost]
+        public IHttpActionResult ConsultarPolizaCliente(ConsultarPolizaClienteReq objReq)
+        {
+            //ConsultarPolizaClienteReq oReq = new ConsultarPolizaClienteReq();
             ConsultarPolizaClienteRes oRes = new ConsultarPolizaClienteRes();
 
-            oRes = _consultasLN.ConsultarPolizaCliente(oReq);
-            return oRes;
+            oRes = _consultasLN.ConsultarPolizaCliente(objReq);
+            return Json(new { data = oRes.ListadoPolizas });
+        }
+
+        [HttpPost]
+        public IHttpActionResult ConsultarPolizaClientexID(ConsultarPolizaClientexIDReq objReq)
+        {
+            //ConsultarPolizaClienteReq oReq = new ConsultarPolizaClienteReq();
+            ConsultarPolizaClientexIDRes oRes = new ConsultarPolizaClientexIDRes();
+
+            oRes = _consultasLN.ConsultarPolizaClientexID(objReq);
+            return Json(new { data = oRes.ListadoPolizas });
         }
     }
 }

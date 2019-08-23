@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace P_000703.Entidades.Entrada
 {
-  
-    public class ConsultarPolizaClienteReq
+    [Serializable]
+    public class ConsultarClientesReq
     {
-        public Guid Crm_Cliente { get; set; }
     }
 }

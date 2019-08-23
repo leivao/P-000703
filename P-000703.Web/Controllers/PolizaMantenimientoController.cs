@@ -26,17 +26,17 @@ namespace P_000703.Web.Controllers
         }*/
 
         [HttpPost]
-        public MantenimientoPolizaClienteRes MantenimientoPolizaCliente(MantenimientoPolizaClienteReq objReq)
+        public string MantenimientoPolizaCliente(MantenimientoPolizaClienteReq objReq)
         {
             MantenimientoPolizaClienteRes oRes = new MantenimientoPolizaClienteRes();
             MantenimientosAD _mantenimientoAD = new MantenimientosAD();
             MantenimientosLN _mantenimientoLN = new MantenimientosLN(_mantenimientoAD);
             oRes = _mantenimientoLN.MantenimientoPolizaCliente(objReq);
-            return oRes;
+            return oRes.Mensaje;
         }
 
         [HttpPost]
-        public MantenimientoPolizaRes MantenimientoPoliza(MantenimientoPolizaReq objReq)
+        public string MantenimientoPoliza(MantenimientoPolizaReq objReq)
         {
             MantenimientosAD _mantenimientoAD = new MantenimientosAD();
             MantenimientosLN _mantenimientoLN = new MantenimientosLN(_mantenimientoAD);
@@ -45,7 +45,8 @@ namespace P_000703.Web.Controllers
             MantenimientoPolizaRes oRes = new MantenimientoPolizaRes();
             
             oRes = _mantenimientoLN.MantenimientoPoliza(objReq);
-            return oRes;
+            
+            return oRes.Mensaje;
         }
 
     }

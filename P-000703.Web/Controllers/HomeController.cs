@@ -6,23 +6,25 @@ using System.Web.Mvc;
 
 namespace P_000703.Web.Controllers
 {
+    
     public class HomeController : Controller
     {
+        [Authorize(Roles = "Administrador,Configurador")]
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
+        
+        public ActionResult PolizaCliente()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Seguros P-000703";
 
-            return View();
+            return View("_PolizaCliente");
         }
-
+        [Authorize(Roles = "Colaborador")]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contacto.";
 
             return View();
         }
