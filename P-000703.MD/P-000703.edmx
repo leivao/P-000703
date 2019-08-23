@@ -136,6 +136,7 @@
           <Property Type="String" Name="cubrimiento" Nullable="false" MaxLength="250" />
           <Property Type="String" Name="tipo_riesgo" Nullable="false" MaxLength="100" />
           <Property Type="Decimal" Name="cobertura_maxima" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="String" Name="inicio_vigencia_formato" Nullable="true" MaxLength="20" />
         </ComplexType>
         <ComplexType Name="PA_CONS_POL_POLIZA_X_CLIENTE_Result">
           <Property Type="Guid" Name="pol_poliza" Nullable="false" />
@@ -170,6 +171,7 @@
           <Property Type="String" Name="cubrimiento" Nullable="false" MaxLength="250" />
           <Property Type="String" Name="tipo_riesgo" Nullable="false" MaxLength="100" />
           <Property Type="Decimal" Name="cobertura_maxima" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="String" Name="inicio_vigencia_formato" Nullable="true" MaxLength="20" />
         </ComplexType>
         <ComplexType Name="PA_CONS_CRM_CLIENTE_Result">
           <Property Type="Guid" Name="crm_cliente" Nullable="false" />
@@ -206,6 +208,7 @@
                 <ScalarProperty Name="cubrimiento" ColumnName="cubrimiento" />
                 <ScalarProperty Name="tipo_riesgo" ColumnName="tipo_riesgo" />
                 <ScalarProperty Name="cobertura_maxima" ColumnName="cobertura_maxima" />
+                <ScalarProperty Name="inicio_vigencia_formato" ColumnName="inicio_vigencia_formato" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -258,6 +261,7 @@
                 <ScalarProperty Name="cubrimiento" ColumnName="cubrimiento" />
                 <ScalarProperty Name="tipo_riesgo" ColumnName="tipo_riesgo" />
                 <ScalarProperty Name="cobertura_maxima" ColumnName="cobertura_maxima" />
+                <ScalarProperty Name="inicio_vigencia_formato" ColumnName="inicio_vigencia_formato" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

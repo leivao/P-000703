@@ -20,13 +20,13 @@
                             <div class="col-md-6 mt-5">
                                 <div class="form-group">
                                     <label>Nombre</label>
-                                    <input type="text" class="form-control" ng-model="Nombre" placeholder="Nombre">
+                                    <input type="text" class="form-control" ng-model="Nombre" placeholder="Nombre" maxlength="100">
                                 </div>
                             </div>
                             <div class="col-md-6 mt-5">
                                 <div class="form-group">
                                     <label>Descripcion</label>
-                                    <input type="text" class="form-control" ng-model="Descripcion" placeholder="Descripcion">
+                                    <input type="text" class="form-control" ng-model="Descripcion" placeholder="Descripcion" maxlength="250">
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                             <div class="col-md-6 mt-5">
                                 <div class="form-group">
                                     <label for="mensaje">Inicio vigencia</label>
-                                    <input type="text" class="form-control" ng-model="Vigencia" placeholder="Inicio Vigencia">
+                                    <input type="text" class="form-control" ng-model="Vigencia" placeholder="Inicio Vigencia" maxlength="10">
 
 
                                 </div>
@@ -54,13 +54,13 @@
                             <div class="col-md-6 mt-5">
                                 <div class="form-group">
                                     <label>Período cobertura</label>
-                                    <input type="number" class="form-control" ng-model="Periodo" placeholder="Periodo">
+                                    <input type="number" onkeypress='AceptarSoloNumeros(event);' class="form-control" ng-model="Periodo" placeholder="Periodo" maxlength="3">
                                 </div>
                             </div>
                             <div class="col-md-6 mt-5">
                                 <div class="form-group">
                                     <label>Precio </label>
-                                    <input type="number" class="form-control" ng-model="Precio" placeholder="Precio">
+                                    <input type="number" class="form-control" ng-model="Precio" placeholder="Precio" maxlength="18">
                                 </div>
                             </div>
                         </div>
@@ -78,6 +78,7 @@
                         </div>
                         <div class="form-group">
                             <button [disabled]="loading" class="btn btn-primary" ng-click="Save()">Guardar</button>
+                            <button [disabled]="loading" class="btn btn-danger" onclick="javascript:location.reload(); ">Cancelar</button>
                         </div>
 
                     </form>
@@ -85,7 +86,7 @@
                 </div>
             </div>
         </div>
-       
+
         <br />
         <div class="row">
             <h3>Polizas</h3>
@@ -110,7 +111,7 @@
                             <td>{{c.nombre}}</td>
                             <td>{{c.descripcion}}</td>
                             <td>{{c.cubrimiento}}</td>
-                            <td>{{c.inicio_vigencia}}</td>
+                            <td>{{c.inicio_vigencia_formato}}</td>
                             <td>{{c.periodo_cobertura}}</td>
                             <td>{{c.precio}}</td>
                             <td>{{c.tipo_riesgo}}</td>
@@ -157,8 +158,18 @@
                 $scope.Listriesgo = mRes.data
                 $scope.GetPolizas();
             });
-            
+
             $scope.Save = function () {
+                 if (!$scope.Nombre
+                    || !$scope.Descripcion
+                    || !$scope.cubrimiento
+                    || !$scope.riesgo
+                    || (!angular.isNumber($scope.Periodo))
+                    || (!angular.isNumber($scope.Precio))
+                    ) {
+                    alert('Ingrese y verifique todos los datos de la póliza');
+                    return false;
+                }
 
                 var id = $scope.IdPoliza;
                 var objReq = {
@@ -182,9 +193,10 @@
                     }
 
                     $http(saveReq).then(function (mRes) {
-                       
+
                         $scope.GetPolizas();
-                        alert(mRes.data);
+                        //alert(mRes.data);
+                        alert(mRes.data.length == 0 ? "Procesado" : mRes.data);
                     });
                 }
                 else {
@@ -197,7 +209,7 @@
                         Precio: $scope.Precio,
                         Pol_Tipo_Riesgo: $scope.riesgo,
                         TipoOperacion: 2,
-                        Pol_Poliza:$scope.IdPoliza
+                        Pol_Poliza: $scope.IdPoliza
                     }
                     var updateReq = {
                         method: "POST",
@@ -209,8 +221,9 @@
 
                     $http(updateReq).then(function (mRes) {
                         $scope.GetPolizas();
-                      
-                        alert(mRes.data);
+
+                        //alert(mRes.data);
+                        alert(mRes.data.length == 0 ? "Procesado" : mRes.data);
                     });
                 }
                 $scope.ClearControls();
@@ -256,34 +269,34 @@
 
                 $http(deleteReq).then(function (mRes) {
                     var o = angular.fromJson(mRes.data)
-                    
+
                     $scope.GetPolizas();
                 });
             };
             $scope.GetPoliza = function (id) {
                 var objReq = {
-                    pol_poliza: id                   
+                    pol_poliza: id
                 }
                 var getPoliza = {
                     method: "POST",
                     url: "../api/PolizaConsultas/ConsultarPolizaId",
                     data: JSON.stringify(objReq)
-                  
+
                 }
                 $http(getPoliza).then(function (mRes) {
                     $scope.Nombre = mRes.data.data[0].nombre;
                     $scope.Descripcion = mRes.data.data[0].descripcion;
                     $scope.cubrimiento = mRes.data.data[0].pol_tipo_cubrimiento;
-                    $scope.Vigencia = mRes.data.data[0].inicio_vigencia;
+                    $scope.Vigencia = mRes.data.data[0].inicio_vigencia_formato;
                     $scope.Periodo = mRes.data.data[0].periodo_cobertura;
                     $scope.Precio = mRes.data.data[0].precio;
                     $scope.riesgo = mRes.data.data[0].pol_tipo_riesgo;
                     $scope.IdPoliza = mRes.data.data[0].pol_poliza;
                     $("#btnPoliza").click();
                 });
-                
 
-                
+
+
             }
         });
     </script>

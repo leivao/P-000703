@@ -13,11 +13,11 @@ namespace P_000703.Web.Controllers
 {
     public class PolizaMantenimientoController : ApiController
     {
-        
+
 
         public PolizaMantenimientoController()
         {
-            
+
         }
 
         /*public PolizaMantenimientoController(IMantenimientosLN mantenimientoLN)
@@ -40,12 +40,12 @@ namespace P_000703.Web.Controllers
         {
             MantenimientosAD _mantenimientoAD = new MantenimientosAD();
             MantenimientosLN _mantenimientoLN = new MantenimientosLN(_mantenimientoAD);
-            
+
             //MantenimientoPolizaReq oReq = new MantenimientoPolizaReq();
             MantenimientoPolizaRes oRes = new MantenimientoPolizaRes();
-            
+
             oRes = _mantenimientoLN.MantenimientoPoliza(objReq);
-            
+
             return oRes.Mensaje;
         }
 

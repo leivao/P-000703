@@ -44,6 +44,7 @@
 
                         <div class="form-group">
                             <button [disabled]="loading" class="btn btn-primary" ng-click="Save()">Guardar</button>
+                            <button [disabled]="loading" class="btn btn-danger" onclick="javascript:location.reload(); ">Cancelar</button>
                         </div>
 
                     </form>
@@ -134,7 +135,13 @@
 
 
             $scope.Save = function () {
-
+                if (!$scope.cmbpoliza
+                    || !$scope.cmbCliente
+                   
+                ) {
+                    alert('Ingrese y verifique todos los datos de la asignación.');
+                    return false;
+                }
                 var id = $scope.IdPoliza;
                 var objReq = {
                     Crm_Cliente: $scope.cmbCliente,

@@ -24,5 +24,6 @@ namespace P_000703.Entidades
         public string cubrimiento { get; set; }
         public string tipo_riesgo { get; set; }
         public decimal cobertura_maxima { get; set; }
+        public string inicio_vigencia_formato { get; set; }
     }
 }

@@ -28,5 +28,11 @@ namespace P_000703.Web.Controllers
 
             return View();
         }
+        public ActionResult About()
+        {
+            ViewBag.Message = "Acerca de...";
+
+            return View();
+        }
     }
 }

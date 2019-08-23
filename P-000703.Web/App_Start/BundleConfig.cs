@@ -25,6 +25,9 @@ namespace P_000703.Web
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/validaciones").Include(
+                      "~/Scripts/Validaciones.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
